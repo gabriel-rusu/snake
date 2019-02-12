@@ -14,6 +14,10 @@ To run the game on your computer you must have:
 
 If you already have it just download the full repository and double click on the ***Snake.jar***.
 
+## Screenshot
+
+![alt text](https://github.com/RusuGabriel/Calculator/blob/master/Resources/Calculator.png)
+
 ## Built With
 
 * [Visual Studio Code](https://code.visualstudio.com/) -a simple yet powerful text editor that inherits many of the capabilities of the Visual Studio IDE.
