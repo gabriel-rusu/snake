@@ -16,7 +16,7 @@ If you already have it just download the full repository and double click on the
 
 ## Screenshot
 
-![alt text](https://github.com/RusuGabriel/Calculator/blob/master/Resources/Calculator.png)
+![alt text](https://github.com/RusuGabriel/Snake-Game/blob/master/Resources/screenshot.png)
 
 ## Built With
 
