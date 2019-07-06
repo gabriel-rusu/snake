@@ -1,4 +1,8 @@
-# Snake Game
+<h1 align="center"> Snake Game </h1>
+
+<p align="center">
+  <img src="https://github.com/RusuGabriel/Snake-Game/blob/master/Resources/snake.png">
+</p>
 
 This is the remastered version of the popular Snake Game realised using the Java Swing classes and **Microsoft Paint 3D** app.
 
