@@ -19,7 +19,10 @@ import javax.swing.Timer;
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     /** How many pixels per tile? */
-    private int TILE_PIXELS = 25;
+    private final int TILE_PIXELS = 25;
+
+    private final int MAP_WIDTH = 34;
+    private final int MAP_HEIGHT = 23;
 
     private int[] snakeXLength = new int[750];
     private int[] snakeYLength = new int[750];
@@ -32,7 +35,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean up = false;
     private boolean down = false;
 
-    private final BufferedImage gameScreen = new BufferedImage(34 * TILE_PIXELS, 23 * TILE_PIXELS,
+    private final BufferedImage gameScreen = new BufferedImage(MAP_WIDTH * TILE_PIXELS, MAP_HEIGHT * TILE_PIXELS,
                                                                BufferedImage.TYPE_INT_RGB);
 
     private final BufferedImage titleImage;
@@ -46,8 +49,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private Timer timer;
     private int delay = 100;
     private Random random = new Random();
-    private int xpos = random.nextInt(34);
-    private int ypos = random.nextInt(23);
+
+    private int xFood = random.nextInt(MAP_WIDTH);
+    private int yFood = random.nextInt(MAP_HEIGHT);
+
+    private boolean isGameOver = false;
 
     public Gameplay() {
         addKeyListener(this);
@@ -128,15 +134,15 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             } else {
                 gg.drawImage(snakeImage, x, y, null);
             }
-        }
 
-        if (xpos == snakeXLength[0] && ypos == snakeYLength[0]) {
-            score++;
-            lengthOfSnake++;
-            xpos = random.nextInt(34);
-            ypos = random.nextInt(23);
+            if (xFood == snakeXLength[0] && yFood == snakeYLength[0]) {
+                score++;
+                lengthOfSnake++;
+                xFood = random.nextInt(MAP_WIDTH);
+                yFood = random.nextInt(MAP_HEIGHT);
+            }
+            gg.drawImage(appleIcon, xFood * TILE_PIXELS, yFood * TILE_PIXELS, null);
         }
-        gg.drawImage(appleIcon, xpos * TILE_PIXELS, ypos * TILE_PIXELS, null);
 
         // now that everything was drawn to game screen, draw the game screen to the panel
         gg.dispose();
@@ -148,6 +154,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 up = false;
                 right = false;
                 down = false;
+
+                isGameOver = true;
 
                 g.setColor(Color.white);
                 g.setFont(new Font("arial", Font.BOLD, 50));
@@ -163,9 +171,17 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            isGameOver = false;
+
             moves = 0;
             score = 0;
             lengthOfSnake = 3;
+
+            up = false;
+            left = false;
+            down = false;
+            right = true;
+
             repaint();
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -241,6 +257,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
+
+        if (isGameOver) return;
+
         if (right) {
             for (int i = lengthOfSnake - 1; i >= 0; i--) {
                 snakeYLength[i + 1] = snakeYLength[i];
@@ -249,13 +268,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 } else {
                     snakeXLength[i] = snakeXLength[i - 1];
                 }
-                if (snakeXLength[i] >= 34) { // TODO replace 34 with MAP_W or something
+                if (snakeXLength[i] >= MAP_WIDTH) {
                     snakeXLength[i] = 0;
                 }
             }
             repaint();
-        }
-        if (left) {
+        } else if (left) {
             for (int i = lengthOfSnake - 1; i >= 0; i--) {
                 snakeYLength[i + 1] = snakeYLength[i];
                 if (i == 0) {
@@ -264,12 +282,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                     snakeXLength[i] = snakeXLength[i - 1];
                 }
                 if (snakeXLength[i] < 0) {
-                    snakeXLength[i] = 34 - 1; // TODO replace 34 with MAP_W or something
+                    snakeXLength[i] = MAP_WIDTH - 1;
                 }
             }
             repaint();
-        }
-        if (up) {
+        } else if (up) {
             for (int i = lengthOfSnake - 1; i >= 0; i--) {
                 snakeXLength[i + 1] = snakeXLength[i];
                 if (i == 0) {
@@ -278,12 +295,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                     snakeYLength[i] = snakeYLength[i - 1];
                 }
                 if (snakeYLength[i] < 0) {
-                    snakeYLength[i] = 23 - 1; // TODO replace 25 with MAP_H or something
+                    snakeYLength[i] = MAP_HEIGHT - 1;
                 }
             }
             repaint();
-        }
-        if (down) {
+        } else if (down) {
             for (int i = lengthOfSnake - 1; i >= 0; i--) {
                 snakeXLength[i + 1] = snakeXLength[i];
                 if (i == 0) {
@@ -291,7 +307,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 } else {
                     snakeYLength[i] = snakeYLength[i - 1];
                 }
-                if (snakeYLength[i] >= 23) { // TODO replace 25 with MAP_H or something
+                if (snakeYLength[i] >= MAP_HEIGHT) {
                     snakeYLength[i] = 0;
                 }
             }
