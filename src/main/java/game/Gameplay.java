@@ -97,19 +97,19 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 rightMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i == 0 && left) {
-                leftMouth = new ImageIcon(getResourceFullPath("Resources/LeftMouth.png"));
+                leftMouth = new ImageIcon(getResourceFullPath("../images/LeftMouth.png"));
                 leftMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i == 0 && up) {
-                upMouth = new ImageIcon(getResourceFullPath("Resources/UpMouth.png"));
+                upMouth = new ImageIcon(getResourceFullPath("../images/UpMouth.png"));
                 upMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i == 0 && down) {
-                downMouth = new ImageIcon(getResourceFullPath("Resources/DownMouth.png"));
+                downMouth = new ImageIcon(getResourceFullPath("../images/DownMouth.png"));
                 downMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i != 0) {
-                snakeImage = new ImageIcon(getResourceFullPath("Resources/SnakeImage.png"));
+                snakeImage = new ImageIcon(getResourceFullPath("../images/SnakeImage.png"));
                 snakeImage.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
         }
