@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.*;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -44,7 +45,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     public Gameplay() {
         addKeyListener(this);
         setFocusable(true);
-        
+
         timer = new Timer(delay, this);
         timer.start();
     }
@@ -66,7 +67,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.drawRect(24, 10, 851, 55);
 
         // draw title image
-        titleImage = new ImageIcon("Resources/TitluSnake.png");
+        titleImage = new ImageIcon(getClass().getResource("../images/TitluSnake.png").getPath());
         titleImage.paintIcon(this, g, 25, 11);
 
         // draw border for gameplay
@@ -87,33 +88,33 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setFont(new Font("Clibri", Font.PLAIN, 14));
         g.drawString("Length:" + lengthOfSnake, 780, 50);
 
-        rightMouth = new ImageIcon("Resources/RightMouth.png");
+        rightMouth = new ImageIcon(getResourceFullPath("../images/RightMouth.png"));
         rightMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);
 
         for (int i = 0; i < lengthOfSnake; i++) {
             if (i == 0 && right) {
-                rightMouth = new ImageIcon("Resources/RightMouth.png");
+                rightMouth = new ImageIcon(getResourceFullPath("../images/RightMouth.png"));
                 rightMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i == 0 && left) {
-                leftMouth = new ImageIcon("Resources/LeftMouth.png");
+                leftMouth = new ImageIcon(getResourceFullPath("Resources/LeftMouth.png"));
                 leftMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i == 0 && up) {
-                upMouth = new ImageIcon("Resources/UpMouth.png");
+                upMouth = new ImageIcon(getResourceFullPath("Resources/UpMouth.png"));
                 upMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i == 0 && down) {
-                downMouth = new ImageIcon("Resources/DownMouth.png");
+                downMouth = new ImageIcon(getResourceFullPath("Resources/DownMouth.png"));
                 downMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i != 0) {
-                snakeImage = new ImageIcon("Resources/SnakeImage.png");
+                snakeImage = new ImageIcon(getResourceFullPath("Resources/SnakeImage.png"));
                 snakeImage.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
         }
 
-        appleIcon = new ImageIcon("Resources/Apple.png");
+        appleIcon = new ImageIcon(getResourceFullPath("../images/Apple.png"));
 
         if ((appleXpos[xpos] == snakeXLength[0] && appleYpos[ypos] == snakeYLength[0])) {
             score++;
@@ -278,6 +279,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             }
             repaint();
         }
+    }
+
+    private String getResourceFullPath(String relativePath) {
+        return getClass().getResource(relativePath).getPath();
     }
 
 }
