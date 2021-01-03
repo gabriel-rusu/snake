@@ -170,7 +170,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        int code = e.getKeyCode();
+
+        if (code == KeyEvent.VK_SPACE) {
             isGameOver = false;
 
             moves = 0;
@@ -183,8 +185,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             right = true;
 
             repaint();
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        } else if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
             moves++;
             right = true;
             if (!left) {
@@ -195,8 +196,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             }
             up = false;
             down = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        } else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
             moves++;
             left = true;
             if (!right) {
@@ -207,8 +207,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             }
             up = false;
             down = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        } else if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
             moves++;
             up = true;
             if (!down) {
@@ -219,8 +218,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             }
             left = false;
             right = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        } else if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
             moves++;
             down = true;
             if (!up) {
