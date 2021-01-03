@@ -1,16 +1,20 @@
 package game;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Event;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
-import javax.swing.Timer;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private int[] snakeXLength = new int[750];
@@ -28,13 +32,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean up = false;
     private boolean down = false;
 
-    private ImageIcon titleImage;
-    private ImageIcon snakeImage;
-    private ImageIcon rightMouth;
-    private ImageIcon upMouth;
-    private ImageIcon downMouth;
-    private ImageIcon leftMouth;
-    private ImageIcon appleIcon;
+    private final BufferedImage titleImage;
+    private final BufferedImage snakeImage;
+    private final BufferedImage appleIcon;
+    private final BufferedImage rightMouth;
+    private final BufferedImage upMouth;
+    private final BufferedImage downMouth;
+    private final BufferedImage leftMouth;
 
     private Timer timer;
     private int delay = 100;
@@ -48,10 +52,22 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         timer = new Timer(delay, this);
         timer.start();
+        
+        // read all images
+        try {
+               titleImage = ImageIO.read(Gameplay.class.getResourceAsStream("/images/TitluSnake.png"));
+               snakeImage = ImageIO.read(Gameplay.class.getResourceAsStream("/images/SnakeImage.png"));
+               appleIcon = ImageIO.read(Gameplay.class.getResourceAsStream("/images/Apple.png"));
+               rightMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/RightMouth.png"));
+               upMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/UpMouth.png"));
+               downMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/DownMouth.png"));
+            leftMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/LeftMouth.png"));
+        } catch(IOException e) {
+               throw new RuntimeException(e);
+          }
     }
 
     public void paint(Graphics g) {
-
         if (moves == 0) {
             snakeXLength[2] = 50;
             snakeXLength[1] = 75;
@@ -67,8 +83,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.drawRect(24, 10, 851, 55);
 
         // draw title image
-        titleImage = new ImageIcon(getClass().getResource("../images/TitluSnake.png").getPath());
-        titleImage.paintIcon(this, g, 25, 11);
+        g.drawImage(titleImage, 25, 11, null);
 
         // draw border for gameplay
         g.setColor(Color.white);
@@ -88,33 +103,26 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setFont(new Font("Clibri", Font.PLAIN, 14));
         g.drawString("Length:" + lengthOfSnake, 780, 50);
 
-        rightMouth = new ImageIcon(getResourceFullPath("../images/RightMouth.png"));
-        rightMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);
+        g.drawImage(rightMouth, snakeXLength[0], snakeYLength[0], null);
 
         for (int i = 0; i < lengthOfSnake; i++) {
-            if (i == 0 && right) {
-                rightMouth = new ImageIcon(getResourceFullPath("../images/RightMouth.png"));
-                rightMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
-            }
-            if (i == 0 && left) {
-                leftMouth = new ImageIcon(getResourceFullPath("../images/LeftMouth.png"));
-                leftMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
-            }
-            if (i == 0 && up) {
-                upMouth = new ImageIcon(getResourceFullPath("../images/UpMouth.png"));
-                upMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
-            }
-            if (i == 0 && down) {
-                downMouth = new ImageIcon(getResourceFullPath("../images/DownMouth.png"));
-                downMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
-            }
-            if (i != 0) {
-                snakeImage = new ImageIcon(getResourceFullPath("../images/SnakeImage.png"));
-                snakeImage.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
-            }
+             int x = snakeXLength[i];
+             int y = snakeYLength[i];
+             
+             if(i == 0) {
+                  if(right) {
+                       g.drawImage(rightMouth, x, y, null);
+                  } else if(left) {
+                       g.drawImage(leftMouth, x, y, null);
+                  } else if(up) {
+                       g.drawImage(upMouth, x, y, null);
+                  } else if(down) {
+                       g.drawImage(downMouth, x, y, null);
+                  }
+             } else {
+                  g.drawImage(snakeImage, x, y, null);
+             }
         }
-
-        appleIcon = new ImageIcon(getResourceFullPath("../images/Apple.png"));
 
         if ((appleXpos[xpos] == snakeXLength[0] && appleYpos[ypos] == snakeYLength[0])) {
             score++;
@@ -122,7 +130,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             xpos = random.nextInt(34);
             ypos = random.nextInt(23);
         }
-        appleIcon.paintIcon(this, g, appleXpos[xpos], appleYpos[ypos]);
+        g.drawImage(appleIcon, appleXpos[xpos], appleYpos[ypos], null);
 
         for (int i = 1; i < lengthOfSnake; i++) {
             if (snakeXLength[i] == snakeXLength[0] && snakeYLength[i] == snakeYLength[0]) {
