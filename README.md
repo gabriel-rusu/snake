@@ -56,7 +56,7 @@ mvn exec:java
 To run the unit-tests on your local computer type the following command: ```mvn test```
 
 ## 🎈 Usage <a name="usage"></a>
-After running the ```mvn exec:java``` command you should be ready to use the Calculator app developed in this project.
+After running the ```mvn exec:java``` command you should be ready to use the Snake Game developed in this project.
 
 ## 👀 Preview <a name = "preview"></a>
  <img width=900px height=630px src="src\main\resources\images\screenshot.png" alt="Project preview">
