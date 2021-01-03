@@ -80,6 +80,7 @@ nb-configuration.xml
 .classpath
 .settings/
 .project
+.target/
 
 ##############################
 ## OS X
