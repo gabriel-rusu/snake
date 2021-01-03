@@ -39,8 +39,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                                                                BufferedImage.TYPE_INT_RGB);
 
     private final BufferedImage titleImage;
-    private final BufferedImage snakeImage;
-    private final BufferedImage appleIcon;
+    private final BufferedImage snakeBody;
+    private final BufferedImage foodIcon;
     private final BufferedImage rightMouth;
     private final BufferedImage upMouth;
     private final BufferedImage downMouth;
@@ -65,12 +65,15 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         // read all images
         try {
             titleImage = ImageIO.read(Gameplay.class.getResourceAsStream("/images/TitluSnake.png"));
-            snakeImage = ImageIO.read(Gameplay.class.getResourceAsStream("/images/SnakeImage.png"));
-            appleIcon = ImageIO.read(Gameplay.class.getResourceAsStream("/images/Apple.png"));
-            rightMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/RightMouth.png"));
-            upMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/UpMouth.png"));
-            downMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/DownMouth.png"));
-            leftMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/LeftMouth.png"));
+
+            foodIcon = ImageIO.read(Gameplay.class.getResourceAsStream("/images/food.png"));
+
+            snakeBody = ImageIO.read(Gameplay.class.getResourceAsStream("/images/snake/body.png"));
+
+            rightMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/snake/mouth/right.png"));
+            upMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/snake/mouth/up.png"));
+            downMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/snake/mouth/down.png"));
+            leftMouth = ImageIO.read(Gameplay.class.getResourceAsStream("/images/snake/mouth/left.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -132,7 +135,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                     gg.drawImage(downMouth, x, y, null);
                 }
             } else {
-                gg.drawImage(snakeImage, x, y, null);
+                gg.drawImage(snakeBody, x, y, null);
             }
 
             if (xFood == snakeXLength[0] && yFood == snakeYLength[0]) {
@@ -141,7 +144,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 xFood = random.nextInt(MAP_WIDTH);
                 yFood = random.nextInt(MAP_HEIGHT);
             }
-            gg.drawImage(appleIcon, xFood * TILE_PIXELS, yFood * TILE_PIXELS, null);
+            gg.drawImage(foodIcon, xFood * TILE_PIXELS, yFood * TILE_PIXELS, null);
         }
 
         // now that everything was drawn to game screen, draw the game screen to the panel
