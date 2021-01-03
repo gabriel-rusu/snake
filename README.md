@@ -14,12 +14,18 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
+- [Preview](#preview)
 - [Built Using](#built_using)
 - [TODO](./TODO.md)
 - [Authors](#authors)
 
 ## 🧐 About <a name = "about"></a>
-Snake is the common name for a video game concept where the player maneuvers a line which grows in length, with the line itself being a primary obstacle. The concept originated in the 1976 arcade game Blockade, and the ease of implementing Snake has led to hundreds of versions (some of which have the word snake or worm in the title) for many platforms. After a variant was preloaded on Nokia mobile phones in 1998, there was a resurgence of interest in the snake concept as it found a larger audience.
+Snake is the common name for a video game concept where the player maneuvers a line
+which grows in length, with the line itself being a primary obstacle. The concept
+originated in the 1976 arcade game Blockade, and the ease of implementing Snake has led
+to hundreds of versions (some of which have the word snake or worm in the title) for
+many platforms. After a variant was preloaded on Nokia mobile phones in 1998, there was
+a resurgence of interest in the snake concept as it found a larger audience.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -51,6 +57,9 @@ To run the unit-tests on your local computer type the following command: ```mvn 
 
 ## 🎈 Usage <a name="usage"></a>
 After running the ```mvn exec:java``` command you should be ready to use the Calculator app developed in this project.
+
+## 👀 Preview <a name = "preview"></a>
+ <img width=900px height=630px src="src\main\resources\images\screenshot.png" alt="Project preview">
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 - [Maven](https://maven.apache.org/) - build tool
