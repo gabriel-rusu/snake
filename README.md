@@ -18,6 +18,7 @@
 - [Built Using](#built_using)
 - [TODO](./TODO.md)
 - [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
 Snake is the common name for a video game concept where the player maneuvers a line
@@ -68,3 +69,6 @@ After running the ```mvn exec:java``` command you should be ready to use the Sna
 
 ## ✍️ Authors <a name = "authors"></a>
 - [@RusuGabriel](https://github.com/RusuGabriel) - Idea & Initial work
+
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+- [@Vulcalien](https://github.com/Vulcalien) - bug fixes & improvements
