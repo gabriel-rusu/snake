@@ -68,7 +68,7 @@ After running the ```mvn exec:java``` command you should be ready to use the Sna
 - [Visual Studio Code](https://code.visualstudio.com/) - code editor
 
 ## ✍️ Authors <a name = "authors"></a>
-- [@RusuGabriel](https://github.com/RusuGabriel) - Idea & Initial work
+- [@gabriel-rusu](https://github.com/gabriel-rusu) - Idea & Initial work
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 - [@Vulcalien](https://github.com/Vulcalien) - bug fixes & improvements
